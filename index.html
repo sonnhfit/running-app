@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Son Running – Train Smarter. Explore Further. Compete Better.</title>
+  <meta name="description" content="Son Running – ứng dụng chạy bộ thông minh nhất. Huấn luyện tốt hơn, khám phá nhiều hơn, cạnh tranh mạnh mẽ hơn." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #fc4c02;
+      --orange-dark: #e03e00;
+      --orange-light: #ff7340;
+      --black: #111111;
+      --gray-900: #1a1a1a;
+      --gray-800: #2d2d2d;
+      --gray-700: #404040;
+      --gray-500: #737373;
+      --gray-300: #c4c4c4;
+      --gray-100: #f5f5f5;
+      --white: #ffffff;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+      --shadow-lg: 0 8px 48px rgba(0,0,0,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 64px;
+      background: rgba(17,17,17,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo svg { flex-shrink: 0; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-300);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--gray-900);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 20px 24px 28px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--gray-300);
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 4px 0;
+    }
+
+    .mobile-menu .btn-primary {
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 1rem;
+      margin-top: 4px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(252,76,2,0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(252,76,2,0.10) 0%, transparent 60%),
+        var(--black);
+      z-index: 0;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(252,76,2,0.15);
+      border: 1px solid rgba(252,76,2,0.35);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--orange-light);
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--gray-300);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero {
+      background: var(--orange);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(252,76,2,0.35);
+    }
+
+    .btn-hero:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(252,76,2,0.45);
+    }
+
+    .btn-hero-ghost {
+      background: transparent;
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-hero-ghost:hover {
+      border-color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .hero-stats {
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -1px;
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .hero-stat-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ─── SECTION SHARED ─── */
+    section { padding: 96px 24px; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--orange);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--gray-300);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ─── PILLARS ─── */
+    .pillars {
+      background: var(--gray-900);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .pillar {
+      padding: 48px 40px;
+      background: var(--gray-900);
+      position: relative;
+      cursor: default;
+      transition: background 0.25s;
+    }
+
+    .pillar:hover { background: var(--gray-800); }
+
+    .pillar + .pillar::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .pillar-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, rgba(252,76,2,0.2) 0%, rgba(252,76,2,0.05) 100%);
+      border: 1px solid rgba(252,76,2,0.25);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .pillar h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.4px;
+    }
+
+    .pillar p {
+      font-size: 0.95rem;
+      color: var(--gray-300);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .pillar-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--orange);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+
+    .pillar-link:hover { gap: 10px; }
+
+    /* ─── FEATURE SECTION ─── */
+    .feature-section {
+      overflow: hidden;
+    }
+
+    .feature-section:nth-child(even) { background: var(--gray-900); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .feature-grid.reverse { direction: rtl; }
+    .feature-grid.reverse > * { direction: ltr; }
+
+    .feature-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--gray-800);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      padding: 24px;
+      position: relative;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(252,76,2,0.3);
+      transform: translateX(4px);
+    }
+
+    .feature-card .badge-new {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .feature-card p {
+      font-size: 0.875rem;
+      color: var(--gray-300);
+      line-height: 1.6;
+    }
+
+    .feature-visual {
+      position: relative;
+    }
+
+    .phone-mockup {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      display: block;
+      aspect-ratio: 9/19;
+      background: var(--gray-800);
+      border-radius: 40px;
+      border: 2px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-lg), 0 0 80px rgba(252,76,2,0.12);
+    }
+
+    .phone-inner {
+      position: absolute;
+      inset: 10px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: var(--gray-900);
+    }
+
+    .phone-screen-train {
+      background: linear-gradient(160deg, #1a0a00 0%, var(--gray-900) 50%);
+      height: 100%;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phone-screen-explore {
+      background: linear-gradient(160deg, #001a0a 0%, var(--gray-900) 50%);
+      height: 100%;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phone-screen-compete {
+      background: linear-gradient(160deg, #0a0a1a 0%, var(--gray-900) 50%);
+      height: 100%;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phone-metric {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .phone-metric-label {
+      font-size: 0.65rem;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .phone-metric-value {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: -0.5px;
+    }
+
+    .phone-metric-sub {
+      font-size: 0.7rem;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .phone-bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 80px;
+      padding: 0 4px;
+    }
+
+    .phone-bar {
+      flex: 1;
+      background: rgba(252,76,2,0.25);
+      border-radius: 4px 4px 0 0;
+      transition: height 1s ease;
+    }
+
+    .phone-bar.active { background: var(--orange); }
+
+    .phone-map {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(0,80,40,0.5) 0%, rgba(0,40,20,0.8) 100%);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      min-height: 100px;
+    }
+
+    .phone-map::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px),
+        repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 16px);
+    }
+
+    .phone-route {
+      position: absolute;
+      top: 20%; left: 15%;
+      width: 70%; height: 60%;
+      border: 2px solid var(--orange);
+      border-radius: 50% 30% 40% 50%;
+      opacity: 0.7;
+    }
+
+    .phone-leaderboard {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .phone-lb-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .phone-lb-rank {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      width: 18px;
+      text-align: center;
+    }
+
+    .phone-lb-rank.gold { color: #fbbf24; }
+
+    .phone-lb-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      flex-shrink: 0;
+    }
+
+    .phone-lb-name {
+      flex: 1;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .phone-lb-time {
+      font-size: 0.7rem;
+      color: var(--orange-light);
+      font-weight: 700;
+    }
+
+    /* ─── COMPARISON TABLE ─── */
+    .comparison { background: var(--black); }
+
+    .comparison-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .comparison-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 560px;
+    }
+
+    thead th {
+      padding: 20px 28px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: left;
+      color: var(--gray-300);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    thead th:nth-child(2),
+    thead th:nth-child(3) {
+      text-align: center;
+      min-width: 130px;
+    }
+
+    .th-free { color: var(--gray-400); }
+
+    .th-pro {
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 1rem;
+    }
+
+    tbody tr {
+      transition: background 0.2s;
+    }
+
+    tbody tr:hover td { background: rgba(255,255,255,0.03); }
+
+    tbody td {
+      padding: 16px 28px;
+      font-size: 0.9rem;
+      color: var(--gray-300);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    tbody td:first-child {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    tbody td:nth-child(2),
+    tbody td:nth-child(3) {
+      text-align: center;
+    }
+
+    .check-yes {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: linear-gradient(135deg, rgba(252,76,2,0.2), rgba(252,76,2,0.05));
+      border: 1px solid rgba(252,76,2,0.3);
+      border-radius: 50%;
+      color: var(--orange);
+      font-size: 0.8rem;
+    }
+
+    .check-no {
+      color: var(--gray-700);
+      font-size: 1.1rem;
+    }
+
+    /* ─── SOCIAL PROOF ─── */
+    .social-proof {
+      background: linear-gradient(135deg, rgba(252,76,2,0.12) 0%, rgba(252,76,2,0.04) 100%);
+      border-top: 1px solid rgba(252,76,2,0.15);
+      border-bottom: 1px solid rgba(252,76,2,0.15);
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .proof-pulse {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .pulse-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--orange);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .pulse-dot::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: rgba(252,76,2,0.3);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.8); opacity: 0.6; }
+      50% { transform: scale(1.4); opacity: 0; }
+    }
+
+    .proof-text {
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.3;
+    }
+
+    .proof-sub {
+      font-size: 1.1rem;
+      color: var(--gray-300);
+      margin-top: 12px;
+    }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      text-align: center;
+      padding: 120px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(252,76,2,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cta-section .section-title {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+
+    .cta-section .section-desc {
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--gray-900);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 64px 24px 40px;
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 220px repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand .nav-logo {
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      display: inline-flex;
+    }
+
+    .footer-brand p {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-300);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .social-icon:hover {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .footer-col h5 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      text-decoration: none;
+      color: var(--gray-300);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    .footer-legal {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-legal a {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-legal a:hover { color: var(--gray-300); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pillar + .pillar::before { display: none; }
+      .pillar + .pillar { border-top: 1px solid rgba(255,255,255,0.07); }
+      .pillar { padding: 36px 24px; }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .feature-grid.reverse { direction: ltr; }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 72px 16px; }
+
+      .hero { padding: 90px 16px 64px; }
+
+      .hero-stats { gap: 28px; }
+      .hero-stat-divider { display: none; }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-legal { flex-direction: column; gap: 10px; }
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="32" height="32" rx="8" fill="#FC4C02"/>
+        <path d="M8 22L13 12L18 18L22 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="10" r="2" fill="white"/>
+      </svg>
+      Son Running
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#train">Huấn luyện</a></li>
+      <li><a href="#explore">Khám phá</a></li>
+      <li><a href="#compete">Cạnh tranh</a></li>
+      <li><a href="#pricing">Gói đăng ký</a></li>
+    </ul>
+
+    <div class="nav-cta">
+      <a href="#" class="btn-ghost">Đăng nhập</a>
+      <a href="#pricing" class="btn-primary">Bắt đầu miễn phí</a>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleMenu();}" aria-label="Menu" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#train" onclick="toggleMenu()">Huấn luyện</a>
+    <a href="#explore" onclick="toggleMenu()">Khám phá</a>
+    <a href="#compete" onclick="toggleMenu()">Cạnh tranh</a>
+    <a href="#pricing" onclick="toggleMenu()">Gói đăng ký</a>
+    <a href="#pricing" class="btn-primary" onclick="toggleMenu()">Bắt đầu miễn phí</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        🏃 Ứng dụng chạy bộ số 1
+      </div>
+      <h1>
+        Tốt nhất. <span class="highlight">Được tạo ra</span><br/>cho mục tiêu của bạn.
+      </h1>
+      <p class="hero-sub">
+        Chào mừng đến với thế giới huấn luyện thông minh hơn, cải thiện liên tục và không ngừng khám phá.
+      </p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-hero">Khám phá gói đăng ký</a>
+        <a href="#train" class="btn-hero-ghost">Tìm hiểu thêm ↓</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-number">19s</div>
+          <div class="hero-stat-label">Mỗi giây có người đạt mục tiêu</div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">100M+</div>
+          <div class="hero-stat-label">Người dùng toàn cầu</div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">AI</div>
+          <div class="hero-stat-label">Phân tích thông minh</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars" id="features">
+    <div class="pillars-grid">
+      <div class="pillar fade-up">
+        <div class="pillar-icon">🏋️</div>
+        <h3>Huấn luyện</h3>
+        <p>Mọi thứ bạn cần để cải thiện thành tích – từ AI phân tích đến dự đoán cá nhân hóa.</p>
+        <a href="#train" class="pillar-link">Khám phá →</a>
+      </div>
+      <div class="pillar fade-up" style="transition-delay:0.1s">
+        <div class="pillar-icon">🗺️</div>
+        <h3>Khám phá</h3>
+        <p>Tìm lộ trình mới, lên kế hoạch an toàn và bắt đầu cuộc phiêu lưu tự tin hơn.</p>
+        <a href="#explore" class="pillar-link">Khám phá →</a>
+      </div>
+      <div class="pillar fade-up" style="transition-delay:0.2s">
+        <div class="pillar-icon">🏆</div>
+        <h3>Cạnh tranh</h3>
+        <p>Vượt bản thân, thách thức bạn bè và leo lên bảng xếp hạng toàn cầu.</p>
+        <a href="#compete" class="pillar-link">Khám phá →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVERYTHING IN ONE PLACE -->
+  <section style="text-align:center; padding: 96px 24px 40px; background: var(--black);">
+    <div class="container">
+      <span class="section-label fade-up">Tất cả trong một nơi</span>
+      <h2 class="section-title fade-up" style="max-width:700px; margin:0 auto;">
+        Mọi thứ bạn cần,<br/>tập trung một chỗ
+      </h2>
+    </div>
+  </section>
+
+  <!-- TRAIN SECTION -->
+  <section class="feature-section" id="train">
+    <div class="container">
+      <div class="feature-grid">
+        <div>
+          <span class="section-label fade-up">Huấn luyện</span>
+          <h2 class="section-title fade-up">Cải thiện nhanh hơn với huấn luyện thông minh</h2>
+          <p class="section-desc fade-up">
+            Mỗi mục tiêu bạn đặt ra và mỗi nỗ lực bạn ghi lại giúp bạn hiểu hiệu suất của mình và đạt được kỷ lục cá nhân mới.
+          </p>
+
+          <div class="feature-cards" style="margin-top:36px;">
+            <div class="feature-card fade-up">
+              <span class="badge-new">Mới</span>
+              <h4>Dự đoán thời gian hoàn thành</h4>
+              <p>Xem thành quả huấn luyện của bạn với dự đoán cá nhân hóa cho 5K, 10K, nửa marathon và marathon tiếp theo.</p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay:0.1s">
+              <span class="badge-new">Mới</span>
+              <h4>So sánh tiến bộ của bạn</h4>
+              <p>Phát huy tối đa khả năng của bản thân. Dễ dàng theo dõi hiệu suất đã thay đổi như thế nào theo thời gian.</p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay:0.2s">
+              <h4>Nhận phân tích bởi AI</h4>
+              <p>Huấn luyện thông minh hơn với Athlete Intelligence – AI biến các chỉ số thành những hiểu biết có ý nghĩa.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:32px;" class="fade-up">
+            <a href="#pricing" class="btn-hero">Bắt đầu huấn luyện</a>
+          </div>
+        </div>
+
+        <div class="feature-visual fade-up">
+          <div class="phone-mockup">
+            <div class="phone-inner">
+              <div class="phone-screen-train">
+                <div class="phone-metric">
+                  <div class="phone-metric-label">Pace trung bình</div>
+                  <div class="phone-metric-value">5:12</div>
+                  <div class="phone-metric-sub">phút/km · +8% so với tuần trước</div>
+                </div>
+                <div class="phone-metric">
+                  <div class="phone-metric-label">Dự đoán 10K tiếp theo</div>
+                  <div class="phone-metric-value">52:04</div>
+                  <div class="phone-metric-sub">Dựa trên 12 buổi gần nhất</div>
+                </div>
+                <div class="phone-bar-chart">
+                  <div class="phone-bar" style="height:35%"></div>
+                  <div class="phone-bar" style="height:55%"></div>
+                  <div class="phone-bar" style="height:45%"></div>
+                  <div class="phone-bar" style="height:70%"></div>
+                  <div class="phone-bar" style="height:60%"></div>
+                  <div class="phone-bar active" style="height:85%"></div>
+                  <div class="phone-bar" style="height:75%"></div>
+                </div>
+                <div class="phone-metric">
+                  <div class="phone-metric-label">AI Phân tích</div>
+                  <div class="phone-metric-value" style="font-size:0.85rem; color: var(--white);">↗ Pace của bạn tốt nhất vào sáng thứ Tư</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE SECTION -->
+  <section class="feature-section" id="explore" style="background: var(--gray-900);">
+    <div class="container">
+      <div class="feature-grid reverse">
+        <div>
+          <span class="section-label fade-up">Khám phá</span>
+          <h2 class="section-title fade-up">Khám phá tự tin hơn</h2>
+          <p class="section-desc fade-up">
+            Tìm lộ trình mới và bắt đầu mà không phải suy nghĩ nhiều để lên kế hoạch tốt hơn, khám phá dễ hơn và có những cuộc phiêu lưu lớn hơn.
+          </p>
+
+          <div class="feature-cards" style="margin-top:36px;">
+            <div class="feature-card fade-up">
+              <span class="badge-new">Mới</span>
+              <h4>Nhận lộ trình phù hợp cho bạn</h4>
+              <p>Công nghệ nâng cấp tạo lộ trình dựa trên hàng triệu hoạt động và cá nhân hóa chúng cho bạn.</p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay:0.1s">
+              <span class="badge-new">Mới</span>
+              <h4>Lên kế hoạch thông minh với lớp bản đồ mới</h4>
+              <p>Bản đồ 3D cập nhật thời gian thực giúp bạn nhận biết những con dốc, rủi ro tuyết và địa hình trước khi đi.</p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay:0.2s">
+              <span class="badge-new">Mới</span>
+              <h4>Thêm điểm dừng hoặc điểm đến</h4>
+              <p>Bao gồm Điểm Quan Tâm, như vòi nước hoặc điểm ngắm cảnh vào lộ trình của bạn. Chúng tôi sẽ lập bản đồ cách tốt nhất để đến đó.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:32px;" class="fade-up">
+            <a href="#pricing" class="btn-hero">Bắt đầu khám phá</a>
+          </div>
+        </div>
+
+        <div class="feature-visual fade-up">
+          <div class="phone-mockup">
+            <div class="phone-inner">
+              <div class="phone-screen-explore">
+                <div class="phone-metric">
+                  <div class="phone-metric-label">Lộ trình đề xuất</div>
+                  <div class="phone-metric-value" style="font-size:1rem; color:var(--white);">Hồ Tây vòng quanh</div>
+                  <div class="phone-metric-sub">12.4km · Độ khó trung bình</div>
+                </div>
+                <div class="phone-map">
+                  <div class="phone-route"></div>
+                </div>
+                <div class="phone-metric">
+                  <div class="phone-metric-label">Điểm nổi bật trên đường</div>
+                  <div class="phone-metric-value" style="font-size:0.85rem; color:var(--white);">🚰 Vòi nước · 📸 View đẹp</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETE SECTION -->
+  <section class="feature-section" id="compete">
+    <div class="container">
+      <div class="feature-grid">
+        <div>
+          <span class="section-label fade-up">Cạnh tranh</span>
+          <h2 class="section-title fade-up">Phát huy tốt nhất với thử thách</h2>
+          <p class="section-desc fade-up">
+            Săn đuổi kỷ lục cá nhân, cạnh tranh với bạn bè và gia đình, hoặc kiếm vị trí của bạn trong đội nhóm lớn nhất thế giới.
+          </p>
+
+          <div class="feature-cards" style="margin-top:36px;">
+            <div class="feature-card fade-up">
+              <h4>Leo lên bảng xếp hạng</h4>
+              <p>Đua thời gian nhanh nhất trên đoạn chạy yêu thích để xem bạn so sánh như thế nào với những người khác.</p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay:0.1s">
+              <h4>Thách thức bạn bè</h4>
+              <p>Biến động lực thành hoạt động nhóm. Tạo thử thách và mời bạn bè của bạn.</p>
+            </div>
+            <div class="feature-card fade-up" style="transition-delay:0.2s">
+              <h4>Trở thành huyền thoại</h4>
+              <p>Chạy hoặc đạp xe trên một Đoạn nhiều nhất trong 90 ngày và giành trạng thái Local Legend.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:32px;" class="fade-up">
+            <a href="#pricing" class="btn-hero">Bắt đầu cạnh tranh</a>
+          </div>
+        </div>
+
+        <div class="feature-visual fade-up">
+          <div class="phone-mockup">
+            <div class="phone-inner">
+              <div class="phone-screen-compete">
+                <div class="phone-metric">
+                  <div class="phone-metric-label">Bảng xếp hạng hôm nay</div>
+                  <div class="phone-metric-value" style="font-size:1rem; color:var(--white);">Segment: Hoàn Kiếm Loop</div>
+                </div>
+                <div class="phone-leaderboard">
+                  <div class="phone-lb-item">
+                    <div class="phone-lb-rank gold">1</div>
+                    <div class="phone-lb-avatar" style="background: linear-gradient(135deg,#fbbf24,#f59e0b)"></div>
+                    <div class="phone-lb-name">Nguyễn Sơn</div>
+                    <div class="phone-lb-time">4:52/km</div>
+                  </div>
+                  <div class="phone-lb-item">
+                    <div class="phone-lb-rank">2</div>
+                    <div class="phone-lb-avatar" style="background: linear-gradient(135deg,#60a5fa,#3b82f6)"></div>
+                    <div class="phone-lb-name">Trần Minh</div>
+                    <div class="phone-lb-time">5:03/km</div>
+                  </div>
+                  <div class="phone-lb-item">
+                    <div class="phone-lb-rank">3</div>
+                    <div class="phone-lb-avatar" style="background: linear-gradient(135deg,#34d399,#10b981)"></div>
+                    <div class="phone-lb-name">Lê Thu Hà</div>
+                    <div class="phone-lb-time">5:18/km</div>
+                  </div>
+                  <div class="phone-lb-item" style="border: 1px solid rgba(252,76,2,0.3);">
+                    <div class="phone-lb-rank" style="color: var(--orange);">Bạn</div>
+                    <div class="phone-lb-avatar"></div>
+                    <div class="phone-lb-name">Bạn</div>
+                    <div class="phone-lb-time">5:32/km</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="comparison" id="pricing">
+    <div class="container">
+      <div class="comparison-header">
+        <span class="section-label fade-up" style="justify-content:center;">Gói đăng ký</span>
+        <h2 class="section-title fade-up">Và nói "mọi thứ", chúng tôi thực sự muốn nói mọi thứ</h2>
+      </div>
+      <div class="comparison-wrapper fade-up">
+        <table>
+          <thead>
+            <tr>
+              <th>Tính năng</th>
+              <th class="th-free">Miễn phí</th>
+              <th><span class="th-pro">Đăng ký</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ghi lại hoạt động</td>
+              <td><span class="check-yes">✓</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Kết nối cộng đồng</td>
+              <td><span class="check-yes">✓</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Đặt và theo dõi Mục tiêu tùy chỉnh</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Huấn luyện thông minh với phân tích cá nhân hóa</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Xem toàn bộ lịch sử huấn luyện</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Tìm, xây dựng và lưu lộ trình</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Xem tiến bộ và thể lực theo thời gian</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Tham gia và tạo Thử thách với bạn bè</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+            <tr>
+              <td>Cạnh tranh trên Bảng xếp hạng Đoạn</td>
+              <td><span class="check-no">—</span></td>
+              <td><span class="check-yes">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top: 48px; text-align:center;" class="fade-up">
+        <a href="#" class="btn-hero">Đăng ký ngay hôm nay</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="social-proof">
+    <div class="proof-pulse">
+      <div class="pulse-dot"></div>
+      <span style="font-size:0.9rem; color: var(--gray-300);">Đang hoạt động ngay bây giờ</span>
+    </div>
+    <p class="proof-text fade-up">
+      Cứ mỗi 19 giây, một người đăng ký<br/>đạt được mục tiêu của họ.
+    </p>
+    <p class="proof-sub fade-up">Chào mừng đến với câu lạc bộ.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="section-label fade-up" style="justify-content:center;">Son Running</span>
+    <h2 class="section-title fade-up">Sẵn sàng bắt đầu<br/>hành trình của bạn?</h2>
+    <p class="section-desc fade-up" style="text-align:center;">
+      Tham gia cùng hàng triệu người đang chạy thông minh hơn, khám phá xa hơn và cạnh tranh tốt hơn.
+    </p>
+    <div class="cta-actions fade-up">
+      <a href="#pricing" class="btn-hero">Bắt đầu miễn phí</a>
+      <a href="#features" class="btn-hero-ghost">Xem tính năng</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="#FC4C02"/>
+            <path d="M8 22L13 12L18 18L22 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="10" r="2" fill="white"/>
+          </svg>
+          Son Running
+        </a>
+        <p>Ứng dụng chạy bộ thông minh nhất. Được xây dựng cho mục tiêu của bạn.</p>
+        <div class="footer-social">
+          <a href="https://facebook.com" class="social-icon" aria-label="Facebook" rel="noopener noreferrer" target="_blank">f</a>
+          <a href="https://instagram.com" class="social-icon" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://twitter.com" class="social-icon" aria-label="Twitter" rel="noopener noreferrer" target="_blank">𝕏</a>
+          <a href="https://youtube.com" class="social-icon" aria-label="YouTube" rel="noopener noreferrer" target="_blank">▶</a>
+          <a href="https://linkedin.com" class="social-icon" aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Menu</h5>
+        <ul>
+          <li><a href="#features">Tính năng</a></li>
+          <li><a href="#pricing">Gói đăng ký</a></li>
+          <li><a href="#">Gói gia đình</a></li>
+          <li><a href="#">Đối tác gói đăng ký</a></li>
+          <li><a href="#">Ưu đãi học sinh, sinh viên</a></li>
+          <li><a href="#">Tặng quà</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Lộ trình</h5>
+        <ul>
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Stories</a></li>
+          <li><a href="#">Hỗ trợ</a></li>
+          <li><a href="#">Nghề nghiệp</a></li>
+          <li><a href="#">Báo chí</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Doanh nghiệp</h5>
+        <ul>
+          <li><a href="#">Trung tâm đối tác</a></li>
+          <li><a href="#">Doanh nghiệp</a></li>
+          <li><a href="#">API</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Son Running. Bảo lưu mọi quyền.</p>
+      <div class="footer-legal">
+        <a href="#">Chính sách quyền riêng tư</a>
+        <a href="#">Điều khoản dịch vụ</a>
+        <a href="#">Không chia sẻ thông tin cá nhân của tôi</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+    }
+
+    // Close menu on outside click
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+
+    // Scroll animations
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    fadeEls.forEach(function(el) { observer.observe(el); });
+
+    // Nav scroll effect
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 40) {
+        nav.style.background = 'rgba(17,17,17,0.97)';
+      } else {
+        nav.style.background = 'rgba(17,17,17,0.85)';
+      }
+    });
+  </script>
+</body>
+</html>
