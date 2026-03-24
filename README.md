@@ -99,3 +99,37 @@ YouTube
 LinkedIn
 
 
+
+---
+
+## Form đăng ký nhận thông tin (Newsletter)
+
+Form đăng ký được thêm vào phía dưới phần "Sẵn sàng bắt đầu hành trình của bạn?". Khi người dùng điền tên và email rồi nhấn **Đăng ký**, dữ liệu sẽ được ghi thêm một dòng vào Google Trang tính.
+
+### Cách kết nối với Google Trang tính
+
+Vì Google Sheets API yêu cầu xác thực khi ghi dữ liệu, bạn cần triển khai một **Google Apps Script Web App** làm trung gian. Thực hiện theo các bước sau:
+
+1. Truy cập [https://script.google.com](https://script.google.com) và tạo dự án mới.
+2. Sao chép toàn bộ nội dung file **`apps-script.gs`** vào trình chỉnh sửa script.
+3. Nhấn **Deploy → New deployment → Web app**.
+4. Thiết lập:
+   - **Execute as:** Me (tài khoản Google của bạn)
+   - **Who has access:** Anyone
+5. Nhấn **Deploy** và cấp quyền truy cập khi được yêu cầu.
+6. Sao chép **Web App URL** được cung cấp.
+7. Mở `index.html`, tìm dòng:
+   ```js
+   var NEWSLETTER_ENDPOINT = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+   ```
+   Thay toàn bộ chuỗi URL bằng Web App URL vừa sao chép.
+
+### Cấu trúc dữ liệu trong Google Trang tính
+
+Mỗi lần đăng ký thành công sẽ thêm một hàng mới với 3 cột:
+
+| Timestamp | Tên | Email |
+|-----------|-----|-------|
+| (tự động) | Nguyễn Văn A | example@email.com |
+
+Bạn có thể thêm dòng tiêu đề vào hàng đầu của sheet theo cấu trúc trên.
